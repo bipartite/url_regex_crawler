@@ -7,13 +7,20 @@ import asyncio
 import urllib
 import datetime
 import aiohttp
-
+import sqlite3
+import os
 
 urls_to_check = {}
 
+DEFAULT_PATH = os.path.join(os.path.dirname(__file__), 'url_crawl.sqlite3')
+
+
+def db_connect(db_path=DEFAULT_PATH):
+    con = sqlite3.connect(db_path)
+    return con
+
 
 class RegSearch:
-
     def __init__(self, num_found, pattern, found_regex):
         self.num_found = num_found
         self.pattern = pattern
